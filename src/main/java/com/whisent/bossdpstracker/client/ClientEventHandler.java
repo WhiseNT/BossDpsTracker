@@ -80,7 +80,7 @@ public class ClientEventHandler {
             finalBossName += "...";
         }
         gui.drawString(mc.font, displayTypeName,
-                x + guiWidth - 4 - titleWith, y + 4,
+                x + guiWidth - 5 - titleWith, y + 4,
                 0xffffff);
         gui.drawString(mc.font, finalBossName,
                 x + 6, y + 4, 0xffffff);
@@ -105,7 +105,7 @@ public class ClientEventHandler {
             String name = entry.getKey();
 
             ClientBossDpsData.PlayerDpsInfo info = entry.getValue();
-            final var valueText = getValueText(info);
+            var valueText = getValueText(info);
             int textWidth = mc.font.width(valueText);
             int drawX = x + barWidth+3 - textWidth;
             int valueWidth = mc.font.width(valueText);

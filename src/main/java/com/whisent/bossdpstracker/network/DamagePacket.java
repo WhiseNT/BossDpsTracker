@@ -8,8 +8,8 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class DamagePacket {
-    private final int bossId;
-    private final CompoundTag playersData;
+    private int bossId;
+    private CompoundTag playersData;
     public DamagePacket(int bossId,CompoundTag playersData) {
         this.bossId = bossId;
         this.playersData = playersData;

@@ -70,9 +70,7 @@ public class BDTDpsData {
         if (total <= 0) return 0;
         return (getDamageForPlayer(uuid) / total) * 100F;
     }
-    public boolean isEnded() {
-        return bossEntity.isRemoved();
-    }
+
 
     public void endFight() {
         for (UUID uuid : participants) {
