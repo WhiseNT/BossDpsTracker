@@ -20,8 +20,6 @@ public class ClientBossDpsManager {
         return currentBossData;
     }
     public static boolean isDisplay() {
-        if (!enableFlag)
-            return false;
         return displayFlag;
     }
     public static void setDisplay(boolean flag) {

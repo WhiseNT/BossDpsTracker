@@ -4,6 +4,7 @@ import com.whisent.bossdpstracker.BossDpsTracker;
 import com.whisent.bossdpstracker.core.BDTDpsTracker;
 import com.whisent.bossdpstracker.network.DamagePacket;
 import com.whisent.bossdpstracker.network.NetworkHandler;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -13,15 +14,20 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = BossDpsTracker.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -73,7 +79,7 @@ public class ServerEventHandler {
                     }
                 }
             }
-        }else  {
+        }else {
             if (!BDTDpsTracker.hasBossDpsData(mob.getUUID())) {
                 BDTDpsTracker.createBossDpsData(level, mob.getUUID());
             }
@@ -84,6 +90,7 @@ public class ServerEventHandler {
                 BDTDpsTracker.createBossDpsData(level, bossUuid);
             }
             BDTDpsTracker.applyDamage(level, bossUuid, playerUuid, event.getAmount());
+
         }
 
     }

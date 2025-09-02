@@ -11,6 +11,8 @@ import java.util.*;
 
 public class BDTDpsData {
     private final Map<UUID,Float> playerDamageMap = new HashMap<>();
+    private final Map<UUID,Float> playerHurtMap = new HashMap<>();
+    private final Map<UUID,Float> playerDPSMap = new HashMap<>();
     private final Set<UUID> participants = new HashSet<>();
     private long fightStartTime;
     private final ServerLevel level;

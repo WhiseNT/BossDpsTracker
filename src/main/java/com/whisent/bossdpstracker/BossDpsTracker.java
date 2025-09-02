@@ -2,9 +2,11 @@ package com.whisent.bossdpstracker;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
+import com.whisent.bossdpstracker.client.BossDpsOverlay;
 import com.whisent.bossdpstracker.network.NetworkHandler;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,8 +29,8 @@ public class BossDpsTracker {
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public BossDpsTracker() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public BossDpsTracker(FMLJavaModLoadingContext context) {
+        IEventBus modEventBus = context.getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
 
@@ -52,6 +54,12 @@ public class BossDpsTracker {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
         }
+        
+        @SubscribeEvent
+        public static void onRegisterGuiOverlays(RegisterGuiOverlaysEvent event) {
+            event.registerAboveAll("boss_dps", new BossDpsOverlay());
+        }
+
         public static final KeyMapping DISPLAY =
                 new KeyMapping("key.bossdpstracker.display",
                         KeyConflictContext.IN_GAME,
