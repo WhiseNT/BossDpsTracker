@@ -42,9 +42,7 @@ public class ServerEventHandler {
                     BDTDpsTracker.removeBossDpsData(bossId);
                 }
             });
-            if (!BDTDpsTracker.hasBossDpsData(event.getEntity().getUUID())) {
-                BDTDpsTracker.createBossDpsData((ServerLevel) event.getLevel(),event.getEntity().getUUID());
-            }
+
 
         }
     }
@@ -58,16 +56,14 @@ public class ServerEventHandler {
         Entity sourceEntity = event.getSource().getEntity();
         if (!entity.isRemoved() && sourceEntity instanceof LivingEntity) {
             if (BDTDpsTracker.isBoss(mob)) {
+                boolean firstUpdate = false;
                 if (!BDTDpsTracker.hasBossDpsData(mob.getUUID())) {
                     BDTDpsTracker.createBossDpsData(level, mob.getUUID());
+                    firstUpdate = true;
                 }
                 UUID bossUuid = mob.getUUID();
                 UUID playerUuid = sourceEntity.getUUID();
 
-                // ✅ 先确保 Boss 数据已创建
-                if (!BDTDpsTracker.hasBossDpsData( bossUuid)) {
-                    BDTDpsTracker.createBossDpsData(level, bossUuid);
-                }
 
                 BDTDpsTracker.applyDamage(level, bossUuid, playerUuid, event.getAmount());
 
@@ -75,7 +71,7 @@ public class ServerEventHandler {
                 if (mob.isAlive()) {
                     CompoundTag tag = BDTDpsTracker.getBossDpsDataNBT(bossUuid);
                     if (tag != null) {
-                        NetworkHandler.sendToAllClient(new DamagePacket(mob.getId(), tag));
+                        NetworkHandler.sendToAllClient(new DamagePacket(mob.getId(), tag, firstUpdate));
                     }
                 }
             }
@@ -109,7 +105,7 @@ public class ServerEventHandler {
             if (BDTDpsTracker.hasBossDpsData(bossUuid)) {
                 CompoundTag tag = BDTDpsTracker.getBossDpsDataNBT(bossUuid);
                 if (tag != null) {
-                    NetworkHandler.sendToAllClient(new DamagePacket(entity.getId(), tag));
+                    NetworkHandler.sendToAllClient(new DamagePacket(entity.getId(), tag,false));
                 }
             }
         }

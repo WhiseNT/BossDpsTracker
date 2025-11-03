@@ -1,7 +1,16 @@
 {
   "key.bossdpstracker.change_data_type": "Change Displayed Data",
   "key.bossdpstracker.display": "Display Data",
+  "key.bossdpstracker.open_config": "Open DPS Tracker Config",
   "key.categories.bossdpstracker": "Boss DPS Tracker",
 
-  "chat.bossdpstracker.generic": "Generic Damage"
+  "chat.bossdpstracker.generic": "Generic Damage",
+  
+  "screen.bossdpstracker.config": "Boss DPS Tracker Configuration",
+  "screen.bossdpstracker.config_button": "DPS Tracker Config",
+  "screen.bossdpstracker.drag_hint": "Drag the preview box to change position. Hold Alt and drag to scale.",
+  "screen.bossdpstracker.save": "Apply",
+  "screen.bossdpstracker.cancel": "Cancel",
+  "screen.bossdpstracker.reset": "Reset to Default",
+  "screen.bossdpstracker.current_pos_scale": "Position: (%s, %s), Scale: %s"
 }

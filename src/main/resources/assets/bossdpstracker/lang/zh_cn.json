@@ -1,7 +1,16 @@
 {
   "key.bossdpstracker.change_data_type": "更改显示数据",
   "key.bossdpstracker.display": "显示数据",
+  "key.bossdpstracker.open_config": "打开DPS追踪器配置",
   "key.categories.bossdpstracker": "Boss伤害追踪器",
 
-  "chat.bossdpstracker.generic": "无源伤害"
+  "chat.bossdpstracker.generic": "无源伤害",
+  
+  "screen.bossdpstracker.config": "Boss DPS追踪器配置",
+  "screen.bossdpstracker.config_button": "DPS追踪器配置",
+  "screen.bossdpstracker.drag_hint": "拖拽预览框以更改位置，按住Alt键拖拽可调整大小",
+  "screen.bossdpstracker.save": "应用",
+  "screen.bossdpstracker.cancel": "取消",
+  "screen.bossdpstracker.reset": "重置为默认",
+  "screen.bossdpstracker.current_pos_scale": "位置: (%s, %s), 缩放: %s"
 }

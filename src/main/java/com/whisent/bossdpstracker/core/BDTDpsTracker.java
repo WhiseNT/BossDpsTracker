@@ -1,6 +1,7 @@
 package com.whisent.bossdpstracker.core;
 
 import com.whisent.bossdpstracker.BossDpsTracker;
+import com.whisent.bossdpstracker.api.CustomBossApi;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -130,7 +131,12 @@ public class BDTDpsTracker {
 
     public static boolean isBoss(Entity entity) {
         TagKey<EntityType<?>> bossTag = TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge","bosses"));
-        return entity.getType().is(bossTag);
+        boolean tagBoss = entity.getType().is(bossTag);
+
+        if (!tagBoss) {
+            return CustomBossApi.containsBoss(entity.getType());
+        }
+        return tagBoss;
     }
     public static CompoundTag getBossDpsDataNBT(UUID bossUUID) {
         BDTDpsData bossDpsData = getBossDpsData(bossUUID);

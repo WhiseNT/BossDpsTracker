@@ -2,6 +2,7 @@ package com.whisent.bossdpstracker.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.whisent.bossdpstracker.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -23,7 +24,7 @@ public class BossDpsOverlay implements IGuiOverlay {
         if (!ClientBossDpsManager.isDisplay()) return;
         Minecraft mc = Minecraft.getInstance();
 
-        int guiWidth = 100;
+        int guiWidth = (int) (Config.guiWidth * Config.guiScale);
         // ✅ 先获取数据，再判空
         ClientBossDpsData data = ClientBossDpsManager.getCurrentBossData();
         if (data == null || data.getBossId() == -1 || data.getPlayerData().isEmpty()) return;
@@ -47,20 +48,20 @@ public class BossDpsOverlay implements IGuiOverlay {
             default -> "dmg";
         };
 
-        int x = 10;
-        int y = 30;
-        int lineHeight = 14;
-        int titleWith = mc.font.width(displayTypeName);
-        int factor = 16;
+        int x = Config.guiOffsetX;
+        int y = Config.guiOffsetY;
+        int lineHeight = (int) (14 * Config.guiScale);
+        int titleWidth = mc.font.width(displayTypeName);
+        int factor = (int) (16 * Config.guiScale);
         if (displayTypeName.equals("dmg%")) {
-            factor = 15;
+            factor = (int) (15 * Config.guiScale);
         }
         String finalBossName = mc.font.plainSubstrByWidth(bossName, 4 * factor);
         if (finalBossName.length() < bossName.length()) {
             finalBossName += "...";
         }
         guiGraphics.drawString(mc.font, displayTypeName,
-                x + guiWidth - 5 - titleWith, y + 4,
+                x + guiWidth - 5 - titleWidth, y + 4,
                 0xffffff);
         guiGraphics.drawString(mc.font, finalBossName,
                 x + 6, y + 4, 0xffffff);
@@ -68,14 +69,14 @@ public class BossDpsOverlay implements IGuiOverlay {
         y += 10;
         List<Map.Entry<String, ClientBossDpsData.PlayerDpsInfo>> entries = new ArrayList<>(data.getPlayerData().entrySet());
         entries.sort((o1, o2) -> Float.compare(o2.getValue().totalDamage, o1.getValue().totalDamage));
-        int maxToShow = Math.min(10, entries.size());
+        int maxToShow = Math.min(Config.maxPlayersShown, entries.size());
         // ✅ 绘制半透明黑色背景
         PoseStack poseStack = guiGraphics.pose();
         poseStack.pushPose();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         guiGraphics.fill(x, y - 10,
-                x + guiWidth, y + 14 * maxToShow + 8, 0x44000000); // ✅ 透明黑背景
+                x + guiWidth, y + (int) (14 * maxToShow * Config.guiScale) + 8, 0x44000000); // ✅ 透明黑背景
         RenderSystem.disableBlend();
         poseStack.popPose();
         int barWidth = (int) (guiWidth * 0.92f);
@@ -87,11 +88,11 @@ public class BossDpsOverlay implements IGuiOverlay {
             ClientBossDpsData.PlayerDpsInfo info = entry.getValue();
             var valueText = getValueText(info);
             int textWidth = mc.font.width(valueText);
-            int drawX = x + barWidth+3 - textWidth;
+            int drawX = x + barWidth + 3 - textWidth;
             int valueWidth = mc.font.width(valueText);
-            int totalWidth = 6 * 14;
+            int totalWidth = (int) (6 * 14 * Config.guiScale);
             int nameMaxWidth = totalWidth - valueWidth - 3;
-            int minNameWidth = 18;
+            int minNameWidth = (int) (18 * Config.guiScale);
             if (nameMaxWidth < minNameWidth) {
                 nameMaxWidth = minNameWidth;
             }
@@ -99,7 +100,7 @@ public class BossDpsOverlay implements IGuiOverlay {
                 name = Component.translatable("chat.bossdpstracker.generic").getString();
             }
             y += lineHeight;
-            String displayName = mc.font.plainSubstrByWidth(name,nameMaxWidth);
+            String displayName = mc.font.plainSubstrByWidth(name, nameMaxWidth);
             if (displayName.length() < name.length()) {
                 displayName += "...";
             }
