@@ -1,6 +1,5 @@
 package com.whisent.bossdpstracker.api;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class CustomBossApi {
 
     public static boolean containsBoss(EntityType<?> entityType) {
         for (Map.Entry<EntityType<?>, List<EntityType<?>>> entry : bossMap.entrySet()) {
-            if (entry.getKey().equals(entityType) || entry.getValue().contains(entityType)) {
+            if (entry.getKey().equals(entityType) && entry.getValue().contains(entityType)) {
                 return true;
             }
         }

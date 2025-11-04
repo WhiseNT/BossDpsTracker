@@ -5,13 +5,11 @@ import com.mojang.logging.LogUtils;
 import com.whisent.bossdpstracker.client.BossDpsOverlay;
 import com.whisent.bossdpstracker.network.NetworkHandler;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -49,6 +47,7 @@ public class BossDpsTracker {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+        // 服务器启动时加载活动Boss数据
 
     }
 
