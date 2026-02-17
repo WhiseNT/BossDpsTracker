@@ -12,5 +12,20 @@
   "screen.bossdpstracker.save": "应用",
   "screen.bossdpstracker.cancel": "取消",
   "screen.bossdpstracker.reset": "重置为默认",
-  "screen.bossdpstracker.current_pos_scale": "位置: (%s, %s), 缩放: %s"
+  "screen.bossdpstracker.current_pos_scale": "位置: (%s, %s), 缩放: %s",
+  
+  "screen.bossdpstracker.main_menu": "Boss DPS追踪器设置",
+  "screen.bossdpstracker.display_settings": "显示设置",
+  "screen.bossdpstracker.trackmode_settings": "追踪模式设置",
+  "screen.bossdpstracker.apply": "应用",
+  
+  "screen.bossdpstracker.boss_mode": "Boss模式",
+  "screen.bossdpstracker.hp_mode": "血量模式",
+  "screen.bossdpstracker.boss_mode_selected": "✓ Boss模式",
+  "screen.bossdpstracker.hp_mode_selected": "✓ 血量模式",
+  "screen.bossdpstracker.hp_threshold": "HP阈值",
+  "screen.bossdpstracker.hp_threshold_label": "HP阈值:",
+  "screen.bossdpstracker.select_mode": "选择追踪模式:",
+  "screen.bossdpstracker.current_setting": "当前设置: %s (%s血)",
+  "screen.bossdpstracker.hp_hint": "将追踪最大生命值 ≥ %s 的生物"
 }

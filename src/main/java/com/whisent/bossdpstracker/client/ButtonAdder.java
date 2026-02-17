@@ -1,6 +1,6 @@
 package com.whisent.bossdpstracker.client;
 
-import com.whisent.bossdpstracker.mixin.AccessPauseScreen;
+import com.whisent.bossdpstracker.mixin.AccessScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -14,12 +14,12 @@ public class ButtonAdder {
         Button configButton = Button.builder(
                         Component.literal("BDT"),
                         btn -> {
-                            Minecraft.getInstance().setScreen(new BossDpsScreen(screen));
+                            Minecraft.getInstance().setScreen(new BossDpsMainMenu(screen));
                         })
-                .pos(screen.width / 2 + 104, screen.height / 4 + 75)
+                .pos(screen.width / 2 + 124, screen.height / 4 + 75)
                 .size(22, 20)
                 .build();
-        ((AccessPauseScreen) screen).bdt$addRenderableWidget(configButton);
+        screen.addRenderableWidget(configButton);
 
     }
 }

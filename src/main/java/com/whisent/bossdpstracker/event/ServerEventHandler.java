@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -28,7 +29,7 @@ public class ServerEventHandler {
 
     @SubscribeEvent
     public static void onLivingSpawn(EntityJoinLevelEvent event) {
-        if (BDTDpsTracker.isBoss(event.getEntity()) && !event.getLevel().isClientSide) {
+        if (BDTDpsTracker.shouldTrack(event.getEntity()) && !event.getLevel().isClientSide) {
             ServerLevel level = (ServerLevel) event.getLevel();
             UUID bossUUID = event.getEntity().getUUID();
 
@@ -55,7 +56,7 @@ public class ServerEventHandler {
         Entity sourceEntity = event.getSource().getEntity();
         
         // 统一处理Boss伤害逻辑
-        if (BDTDpsTracker.isBoss(mob)) {
+        if (BDTDpsTracker.shouldTrack(mob)) {
             BossDpsTracker.LOGGER.info("Boss Damage: " + mob.getDisplayName().getString() + " " + event.getAmount());
             boolean firstUpdate = false;
             
@@ -100,7 +101,7 @@ public class ServerEventHandler {
 
     @SubscribeEvent
     public static void onBossDeath(LivingDeathEvent event) {
-        if (BDTDpsTracker.isBoss(event.getEntity())) {
+        if (BDTDpsTracker.shouldTrack(event.getEntity())) {
             UUID bossUuid = event.getEntity().getUUID();
             BDTDpsTracker.removeBossDpsData(bossUuid);
         }
@@ -111,7 +112,7 @@ public class ServerEventHandler {
     public static void onLivingTick(LivingEvent.LivingTickEvent event) {
 
         Entity entity = event.getEntity();
-        if (entity.level().isClientSide || !BDTDpsTracker.isBoss(entity)) return;
+        if (entity.level().isClientSide || !BDTDpsTracker.shouldTrack(entity)) return;
         if (entity == null || entity.isRemoved()) return;
         ServerLevel level = (ServerLevel) entity.level();
         UUID bossUuid = entity.getUUID();
@@ -147,5 +148,5 @@ public class ServerEventHandler {
             }
 
         }
-    }
+    } 
 }

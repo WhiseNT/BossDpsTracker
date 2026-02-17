@@ -1,6 +1,7 @@
 package com.whisent.bossdpstracker.network;
 
 import com.whisent.bossdpstracker.BossDpsTracker;
+import com.whisent.bossdpstracker.Config;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
@@ -17,12 +18,17 @@ public class NetworkHandler {
 
     public static void register() {
         int id = 0;
-        CHANNEL.messageBuilder(DamagePacket.class,id)
+        CHANNEL.messageBuilder(DamagePacket.class,id+=1)
                 .encoder(DamagePacket::encode)
                 .decoder(DamagePacket::decode)
                 .consumerMainThread(DamagePacket::handle)
                 .add();
-
+                
+        CHANNEL.messageBuilder(TrackModePacket.class,id+=1)
+                .encoder(TrackModePacket::encode)
+                .decoder(TrackModePacket::decode)
+                .consumerMainThread(TrackModePacket::handle)
+                .add();
     }
     public static void sendToServer(Object msg) {
         CHANNEL.send(PacketDistributor.SERVER.noArg(),msg);
@@ -30,5 +36,8 @@ public class NetworkHandler {
     public static void sendToAllClient(Object msg) {
         CHANNEL.send(PacketDistributor.ALL.noArg(),msg);
     }
+    
+    public static void sendTrackModeUpdate(Config.TrackMode trackMode, int hpThreshold) {
+        sendToServer(new TrackModePacket(trackMode, hpThreshold));
+    }
 }
-

@@ -12,5 +12,20 @@
   "screen.bossdpstracker.save": "Apply",
   "screen.bossdpstracker.cancel": "Cancel",
   "screen.bossdpstracker.reset": "Reset to Default",
-  "screen.bossdpstracker.current_pos_scale": "Position: (%s, %s), Scale: %s"
+  "screen.bossdpstracker.current_pos_scale": "Position: (%s, %s), Scale: %s",
+  
+  "screen.bossdpstracker.main_menu": "Boss DPS Tracker Settings",
+  "screen.bossdpstracker.display_settings": "Display Settings",
+  "screen.bossdpstracker.trackmode_settings": "Tracking Mode Settings",
+  "screen.bossdpstracker.apply": "Apply",
+  
+  "screen.bossdpstracker.boss_mode": "Boss Mode",
+  "screen.bossdpstracker.hp_mode": "HP Mode",
+  "screen.bossdpstracker.boss_mode_selected": "✓ Boss Mode",
+  "screen.bossdpstracker.hp_mode_selected": "✓ HP Mode",
+  "screen.bossdpstracker.hp_threshold": "HP Threshold",
+  "screen.bossdpstracker.hp_threshold_label": "HP Threshold:",
+  "screen.bossdpstracker.select_mode": "Select Tracking Mode:",
+  "screen.bossdpstracker.current_setting": "Current Setting: %s (%s HP)",
+  "screen.bossdpstracker.hp_hint": "Will track mobs with max health ≥ %s"
 }

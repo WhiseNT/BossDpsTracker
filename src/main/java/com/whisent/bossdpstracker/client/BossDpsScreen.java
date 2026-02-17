@@ -189,7 +189,7 @@ public class BossDpsScreen extends Screen {
 
     private void saveAndClose() {
         // 保存配置
-        Config.saveConfig();
+        Config.saveClientConfig();
         onClose();
     }
     
